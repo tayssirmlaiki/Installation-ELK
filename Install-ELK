@@ -1,0 +1,46 @@
+* sudo apt-get update
+* sudo apt-get install openjdk-8-jdk
+* wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+* sudo apt-get install apt-transport-https
+* echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-7.x.list
+* sudo apt-get update
+
+Install Elasticsearch: 
+* sudo apt-get install elasticsearch
+* sudo systemctl enable elasticsearch
+* sudo systemctl start elasticsearch
+* curl localhost:9200
+
+Configure Elasticsearch: 
+* sudo su
+* vi/ bigdata /etc/elasticsearch/elasticsearch.yml
+* change cluster name
+cluster.name: awstg-elk  
+* give the cluster a descriptive name
+node.name: aws-node
+ * change network binding
+network.host: 0.0.0.0
+* setup discovery.type as single node
+discovery.type: single-node 
+
+Install Logstash:
+* sudo apt-get install logstash
+
+Install Kibana:
+*  sudo apt install kibana
+* sudo systemctl start kibana
+* sudo systemctl enable kibana
+* sudo systemctl status kibana
+
+Configure kibana: 
+* nano /etc/kibana/kibana.yml
+* uncomment server.port
+server.port: 5601
+* change server.host
+server.host: "0.0.0.0"
+* change server.name
+server.name: "awstg-kibana"
+* uncomment elasticsearch.host
+elasticsearch.hosts: ["http://localhost:9200"]
+
+
